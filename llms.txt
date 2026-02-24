@@ -9,7 +9,7 @@ Source: https://github.com/injoon5/mono
 ## Setup
 
 ```html
-<link rel="stylesheet" href="mono.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/injoon5/mono@master/mono.css" />
 ```
 
 No npm. No bundler. Pretendard font is loaded automatically via @import inside the CSS.
