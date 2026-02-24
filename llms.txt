@@ -1,0 +1,1020 @@
+# Mono — LLM Reference
+
+> Mono is a minimal, classname-based CSS framework. One file: `mono.css`. No build step, no JS dependencies, no utility class explosion. Components are semantic HTML elements styled with a small set of BEM-ish class names. Dark mode is built in. Everything is driven by CSS custom properties.
+
+Source: https://github.com/injoon5/mono
+
+---
+
+## Setup
+
+```html
+<link rel="stylesheet" href="mono.css" />
+```
+
+No npm. No bundler. Pretendard font is loaded automatically via @import inside the CSS.
+
+---
+
+## Design tokens
+
+All tokens are CSS custom properties on `:root`. Override them in your own stylesheet after importing Mono.
+
+### Color — semantic (use these in your own styles)
+
+| Token | Light value | Dark value |
+|---|---|---|
+| `--color-bg` | neutral-50 (near white) | neutral-950 (near black) |
+| `--color-surface` | #ffffff | neutral-900 |
+| `--color-surface-2` | neutral-100 | neutral-800 |
+| `--color-border` | neutral-200 | neutral-800 |
+| `--color-border-strong` | neutral-300 | neutral-700 |
+| `--color-text` | neutral-900 | neutral-50 |
+| `--color-text-2` | neutral-600 (secondary text) | neutral-400 |
+| `--color-text-3` | neutral-400 (muted/placeholder) | neutral-600 |
+| `--color-accent` | neutral-900 | neutral-50 |
+| `--color-accent-text` | neutral-50 | neutral-950 |
+| `--color-focus` | neutral-900 | neutral-200 |
+
+### Color — raw palette (11 achromatic neutral steps, oklch)
+
+```
+--neutral-50   oklch(0.985 0 0)   near white
+--neutral-100  oklch(0.97  0 0)
+--neutral-200  oklch(0.922 0 0)
+--neutral-300  oklch(0.87  0 0)
+--neutral-400  oklch(0.715 0 0)
+--neutral-500  oklch(0.556 0 0)
+--neutral-600  oklch(0.439 0 0)
+--neutral-700  oklch(0.371 0 0)
+--neutral-800  oklch(0.269 0 0)
+--neutral-900  oklch(0.205 0 0)   #171717
+--neutral-950  oklch(0.145 0 0)   near black
+```
+
+### Type scale
+
+```
+--text-xs    0.75rem   (12px)
+--text-sm    0.875rem  (14px)
+--text-base  1rem      (16px)   <- body default
+--text-md    1.0625rem (17px)
+--text-lg    1.1875rem (19px)
+--text-xl    1.4375rem (23px)
+--text-2xl   1.8125rem (29px)
+--text-3xl   2.375rem  (38px)
+--text-4xl   3.125rem  (50px)
+```
+
+### Line height
+
+```
+--leading-tight   1.2   (headings)
+--leading-snug    1.4
+--leading-normal  1.6   (body default)
+--leading-loose   1.8
+```
+
+### Letter spacing
+
+```
+--tracking-tight   -0.03em
+--tracking-snug    -0.02em
+--tracking-normal  -0.01em  (body default)
+--tracking-wide     0.04em
+--tracking-wider    0.08em  (labels/caps)
+```
+
+### Spacing scale
+
+```
+--space-1   0.25rem   (4px)
+--space-2   0.5rem    (8px)
+--space-3   0.75rem   (12px)
+--space-4   1rem      (16px)
+--space-5   1.25rem   (20px)
+--space-6   1.5rem    (24px)
+--space-8   2rem      (32px)
+--space-10  2.5rem    (40px)
+--space-12  3rem      (48px)
+--space-16  4rem      (64px)
+--space-20  5rem      (80px)
+--space-24  6rem      (96px)
+```
+
+### Border radius
+
+```
+--radius-sm    4px
+--radius-md    7px
+--radius-lg    11px
+--radius-xl    16px
+--radius-full  9999px
+```
+
+### Shadows
+
+```
+--shadow-xs   subtle, 1px
+--shadow-sm   light, 3px
+--shadow-md   medium, 12px
+--shadow-lg   large, 32px
+--shadow-xl   dramatic, 48px
+```
+
+### Transitions
+
+```
+--ease          cubic-bezier(0.16, 1, 0.3, 1)   spring-out
+--ease-in       cubic-bezier(0.4, 0, 1, 1)
+--ease-out      cubic-bezier(0, 0, 0.2, 1)
+--transition       150ms var(--ease)
+--transition-slow  280ms var(--ease)
+```
+
+---
+
+## Dark mode
+
+Dark mode activates automatically via `prefers-color-scheme: dark`.
+
+To override manually, set `data-theme` on `<html>`:
+
+```html
+<html data-theme="dark">   <!-- force dark -->
+<html data-theme="light">  <!-- force light -->
+```
+
+Toggle with JS:
+
+```js
+const root = document.documentElement
+const isDark = root.getAttribute('data-theme') === 'dark'
+  || (!root.getAttribute('data-theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)
+
+root.setAttribute('data-theme', isDark ? 'light' : 'dark')
+```
+
+---
+
+## Typography
+
+Headings are styled by tag. No class needed.
+
+```html
+<h1>Display — 50px, weight 700, tracking -0.04em</h1>
+<h2>Heading — 38px, weight 600, tracking -0.03em</h2>
+<h3>Subheading — 29px, weight 600, tracking -0.025em</h3>
+<h4>Title — 23px, weight 600, tracking -0.02em</h4>
+<h5>Subtitle — 19px, weight 600, tracking -0.015em</h5>
+<h6>Label — 16px, weight 600</h6>
+
+<p>Body — color-text-2, max-width 68ch, line-height 1.6</p>
+
+<strong>Bold text — color-text, weight 600</strong>
+<em>Italic</em>
+<code>Inline code — monospace, surface-2 bg, border</code>
+<kbd>Cmd K</kbd>
+<blockquote>Quote — left border, italic, color-text-2</blockquote>
+<pre><code>Block code</code></pre>
+```
+
+### Text utility classes
+
+```
+.text-xs     font-size: --text-xs
+.text-sm     font-size: --text-sm
+.text-lg     font-size: --text-lg
+.text-xl     font-size: --text-xl
+.text-muted  color: --color-text-2
+.text-faint  color: --color-text-3
+.text-strong color: --color-text
+```
+
+### Section label (small all-caps eyebrow text)
+
+```html
+<p class="section-label">Features</p>
+```
+
+Renders as: 12px, 500 weight, tracking 0.08em, uppercase, color-text-3.
+
+---
+
+## Layout
+
+### Container
+
+Centers content with max-width and horizontal padding.
+
+```html
+<div class="container">               <!-- max-width: 1120px -->
+<div class="container container-sm">  <!-- 640px  -->
+<div class="container container-md">  <!-- 800px  -->
+<div class="container container-lg">  <!-- 1120px -->
+<div class="container container-xl">  <!-- 1400px -->
+```
+
+### Section
+
+```html
+<section class="section">               <!-- padding-block: 4rem -->
+<section class="section section-sm">    <!-- 2.5rem -->
+<section class="section section-lg">    <!-- 6rem   -->
+```
+
+Section header pattern:
+
+```html
+<div class="section-header">
+  <p class="section-label">About</p>
+  <h2>What we do</h2>
+  <p>Supporting description text.</p>
+</div>
+```
+
+### Grid
+
+```html
+<div class="grid grid-2">    <!-- 2 col, collapses to 1 on mobile -->
+<div class="grid grid-3">    <!-- 3 col, collapses to 2 at 1024px, 1 at 768px -->
+<div class="grid grid-4">    <!-- 4 col, collapses to 2 at 1024px, 1 at 768px -->
+<div class="grid grid-auto"> <!-- auto-fill, minmax(280px, 1fr) -->
+```
+
+Default gap is `--space-6` (1.5rem).
+
+### Stack (vertical flex)
+
+```html
+<div class="stack stack-4">
+  <!-- children stacked vertically with gap: 1rem -->
+</div>
+
+<!-- gap variants: stack-1 stack-2 stack-3 stack-4 stack-6 stack-8 stack-12 -->
+```
+
+### Cluster (horizontal flex, wrapping)
+
+```html
+<div class="cluster cluster-3">
+  <!-- children side by side, wrap, align-items: center, gap: 0.75rem -->
+</div>
+
+<!-- gap variants: cluster-2 cluster-3 cluster-4 -->
+```
+
+---
+
+## Nav
+
+Sticky frosted-glass navbar. No dividers between links.
+
+```html
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-brand">Sitename</a>
+
+    <ul class="nav-links">
+      <li><a href="/about">About</a></li>
+      <li><a href="/work" class="active">Work</a></li>
+      <li><a href="/contact">Contact</a></li>
+    </ul>
+
+    <div class="nav-spacer"></div>
+
+    <div class="nav-actions">
+      <a href="/login" class="btn btn-ghost btn-sm">Log in</a>
+      <a href="/signup" class="btn btn-primary btn-sm">Sign up</a>
+    </div>
+  </div>
+</nav>
+```
+
+Nav links: hover darkens color and shows a slim underline sliding in from center. Active link has a persistent underline. No background color change on hover.
+
+---
+
+## Buttons
+
+```html
+<!-- Variants -->
+<button class="btn btn-primary">Primary</button>
+<button class="btn btn-secondary">Secondary</button>
+<button class="btn btn-ghost">Ghost</button>
+
+<!-- Sizes -->
+<button class="btn btn-primary btn-xs">Extra small</button>
+<button class="btn btn-primary btn-sm">Small</button>
+<button class="btn btn-primary">Default</button>
+<button class="btn btn-primary btn-lg">Large</button>
+
+<!-- States -->
+<button class="btn btn-primary" disabled>Disabled</button>
+
+<!-- With icon -->
+<button class="btn btn-primary">
+  <svg ...></svg>
+  Continue
+</button>
+
+<!-- Loading state -->
+<button class="btn btn-secondary" disabled>
+  <span class="spinner spinner-sm"></span>
+  Saving...
+</button>
+
+<!-- As anchor -->
+<a href="/page" class="btn btn-primary">Go</a>
+```
+
+Default padding: `9px 20px`. Default font size: 16px.
+
+---
+
+## Form controls
+
+All controls share the same visual style: 1px border, `--color-border`, `--radius-md`, transitions on focus/hover.
+
+### Input
+
+```html
+<input class="input" type="text" placeholder="Enter value" />
+
+<!-- Sizes -->
+<input class="input input-sm" type="text" />
+<input class="input input-lg" type="text" />
+
+<!-- States -->
+<input class="input" disabled />
+<input class="input is-error" type="text" />
+
+<!-- With icon prefix -->
+<div class="input-group">
+  <span class="input-icon"><svg ...></svg></span>
+  <input class="input" type="search" placeholder="Search..." />
+</div>
+```
+
+### Textarea
+
+```html
+<textarea class="textarea" rows="4" placeholder="Write here..."></textarea>
+```
+
+Resizable vertically, min-height 100px.
+
+### Select
+
+```html
+<select class="select">
+  <option value="" disabled selected>Choose...</option>
+  <option value="a">Option A</option>
+  <option value="b">Option B</option>
+</select>
+```
+
+Custom chevron arrow via background-image.
+
+### Field wrapper
+
+```html
+<div class="field">
+  <label for="email">
+    Email
+    <span class="label-hint">Required</span>
+  </label>
+  <input class="input" id="email" type="email" />
+  <span class="field-hint">We'll never share your email.</span>
+</div>
+
+<!-- Error state -->
+<div class="field">
+  <label for="user">Username</label>
+  <input class="input is-error" id="user" type="text" />
+  <span class="field-error">Only letters and numbers allowed.</span>
+</div>
+```
+
+### Checkbox
+
+```html
+<label class="checkbox-label">
+  <input type="checkbox" />
+  Accept terms and conditions
+</label>
+```
+
+### Radio
+
+```html
+<label class="radio-label">
+  <input type="radio" name="plan" value="free" />
+  Free plan
+</label>
+<label class="radio-label">
+  <input type="radio" name="plan" value="pro" checked />
+  Pro plan
+</label>
+```
+
+### Switch
+
+```html
+<label class="switch-label">
+  <input type="checkbox" />
+  Enable notifications
+</label>
+<label class="switch-label">
+  <input type="checkbox" checked />
+  Dark mode
+</label>
+```
+
+### Range
+
+```html
+<input class="range" type="range" min="0" max="100" value="50" />
+```
+
+### Input group (joined controls)
+
+```html
+<!-- Select + input -->
+<div class="group">
+  <select class="select" style="width:auto; border-right:none; border-radius: 7px 0 0 7px; flex-shrink:0;">
+    <option>https://</option>
+  </select>
+  <input class="input" type="text" placeholder="yoursite.com" style="border-radius: 0 7px 7px 0;" />
+</div>
+
+<!-- Input + button -->
+<div class="group">
+  <input class="input" type="text" placeholder="Search..." style="border-radius: 7px 0 0 7px;" />
+  <button class="btn btn-primary" style="border-radius: 0 7px 7px 0; flex-shrink:0;">Go</button>
+</div>
+```
+
+---
+
+## Card
+
+```html
+<!-- Simple -->
+<div class="card">
+  <div class="card-body">
+    <p class="card-title">Title</p>
+    <p class="card-description">Supporting text.</p>
+  </div>
+</div>
+
+<!-- With header and footer -->
+<div class="card">
+  <div class="card-header">
+    <span class="card-title">Card title</span>
+    <span class="badge">Tag</span>
+  </div>
+  <div class="card-body">
+    Content goes here.
+  </div>
+  <div class="card-footer">
+    <button class="btn btn-secondary btn-sm">Action</button>
+  </div>
+</div>
+
+<!-- Hoverable -->
+<div class="card card-hover">...</div>
+
+<!-- Inverted / accent -->
+<div class="card" style="background: var(--color-accent); border-color: var(--color-accent);">
+  <div class="card-body">
+    <p class="card-title" style="color: var(--color-accent-text)">Featured</p>
+    <p style="color: oklch(from var(--color-accent-text) l c h / 0.6); font-size: var(--text-sm);">Description.</p>
+  </div>
+</div>
+```
+
+---
+
+## Badge
+
+```html
+<span class="badge">Default</span>
+<span class="badge badge-solid">Solid</span>
+
+<!-- With dot indicator -->
+<span class="badge">
+  <svg ...></svg>
+  Live
+</span>
+```
+
+---
+
+## Accordion
+
+Requires JS to toggle `open` class on `.accordion-item`.
+
+```html
+<div class="accordion">
+  <div class="accordion-item open">
+    <button class="accordion-trigger" onclick="toggleAccordion(this)">
+      Question text
+      <svg class="accordion-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+    </button>
+    <div class="accordion-content">
+      <div class="accordion-body">Answer text.</div>
+    </div>
+  </div>
+
+  <div class="accordion-item">
+    <button class="accordion-trigger" onclick="toggleAccordion(this)">
+      Another question
+      <svg class="accordion-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+    </button>
+    <div class="accordion-content">
+      <div class="accordion-body">Another answer.</div>
+    </div>
+  </div>
+</div>
+```
+
+```js
+function toggleAccordion(btn) {
+  btn.closest('.accordion-item').classList.toggle('open')
+}
+```
+
+When `open`: icon rotates 180deg, content max-height animates to 600px.
+
+---
+
+## Dropdown
+
+Requires JS to toggle `open` class on `.dropdown`.
+
+```html
+<div class="dropdown" tabindex="0">
+  <button class="btn btn-secondary" onclick="toggleDropdown(this.parentElement)">
+    Options
+    <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+  </button>
+
+  <div class="dropdown-menu">
+    <span class="dropdown-label">Section</span>
+    <button class="dropdown-item">Edit</button>
+    <button class="dropdown-item">Duplicate</button>
+    <button class="dropdown-item active">Currently selected</button>
+    <div class="dropdown-divider"></div>
+    <button class="dropdown-item danger">Delete</button>
+  </div>
+</div>
+```
+
+```js
+function toggleDropdown(el) {
+  const isOpen = el.classList.contains('open')
+  document.querySelectorAll('.dropdown.open').forEach(d => d.classList.remove('open'))
+  if (!isOpen) el.classList.add('open')
+}
+
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.dropdown'))
+    document.querySelectorAll('.dropdown.open').forEach(d => d.classList.remove('open'))
+})
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape')
+    document.querySelectorAll('.dropdown.open').forEach(d => d.classList.remove('open'))
+})
+```
+
+Menu animates in with opacity + `scale(0.98)` from top-left. Min-width 200px.
+
+---
+
+## Modal
+
+Toggle `open` class on `.modal-backdrop` to show/hide.
+
+```html
+<!-- Trigger -->
+<button class="btn btn-secondary" onclick="document.getElementById('my-modal').classList.add('open')">
+  Open modal
+</button>
+
+<!-- Markup (anywhere in body) -->
+<div class="modal-backdrop" id="my-modal" onclick="closeModalOnBackdrop(event, 'my-modal')">
+  <div class="modal">
+    <div class="modal-header">
+      <div>
+        <p class="modal-title">Modal title</p>
+        <p class="modal-subtitle">Optional subtitle.</p>
+      </div>
+      <button class="modal-close" onclick="document.getElementById('my-modal').classList.remove('open')" aria-label="Close">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      Body content here.
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost btn-sm" onclick="document.getElementById('my-modal').classList.remove('open')">Cancel</button>
+      <button class="btn btn-primary btn-sm">Confirm</button>
+    </div>
+  </div>
+</div>
+```
+
+```js
+function closeModalOnBackdrop(e, id) {
+  if (e.target === e.currentTarget)
+    document.getElementById(id).classList.remove('open')
+}
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape')
+    document.querySelectorAll('.modal-backdrop.open').forEach(m => m.classList.remove('open'))
+})
+```
+
+Size variants: default 500px max-width, `.modal-sm` 360px, `.modal-lg` 720px.
+Backdrop: blurred dark overlay. Modal scales in from `scale(0.96) translateY(8px)`.
+
+---
+
+## Loading states
+
+### Spinner
+
+```html
+<span class="spinner spinner-sm"></span>  <!-- 14px -->
+<span class="spinner"></span>             <!-- 18px -->
+<span class="spinner spinner-lg"></span>  <!-- 28px -->
+```
+
+### Animated dots
+
+```html
+<span class="loading-dots">
+  <span></span><span></span><span></span>
+</span>
+```
+
+### Skeleton shimmer
+
+```html
+<!-- Text lines -->
+<span class="skeleton skeleton-text w-full"></span>
+<span class="skeleton skeleton-text w-3/4"></span>
+<span class="skeleton skeleton-text w-1/2"></span>
+
+<!-- Circle avatar placeholder -->
+<span class="skeleton skeleton-circle"></span>   <!-- 36x36px -->
+
+<!-- Card image placeholder -->
+<span class="skeleton skeleton-card"></span>     <!-- 120px tall -->
+
+<!-- Full card skeleton -->
+<div class="card">
+  <div class="card-body">
+    <div class="cluster cluster-3 items-center mb-4">
+      <span class="skeleton skeleton-circle"></span>
+      <div class="stack stack-2" style="flex:1">
+        <span class="skeleton skeleton-text w-3/4"></span>
+        <span class="skeleton skeleton-text w-1/2"></span>
+      </div>
+    </div>
+    <span class="skeleton skeleton-text w-full"></span>
+    <span class="skeleton skeleton-text w-full mt-2"></span>
+    <span class="skeleton skeleton-text w-3/4 mt-2"></span>
+  </div>
+</div>
+```
+
+---
+
+## Table
+
+```html
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Status</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Project alpha</strong></td>
+        <td><span class="badge badge-solid">Active</span></td>
+        <td class="text-faint">2 hours ago</td>
+      </tr>
+      <tr>
+        <td><strong>Project beta</strong></td>
+        <td><span class="badge">Paused</span></td>
+        <td class="text-faint">3 days ago</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+```
+
+`.table-wrap` handles horizontal scroll and the rounded border. Rows highlight on hover.
+
+---
+
+## Alert
+
+```html
+<!-- Neutral (default) -->
+<div class="alert">
+  <svg class="alert-icon" ...></svg>
+  <span>Informational message. <a href="#">Learn more.</a></span>
+</div>
+
+<!-- Success — apply inline color overrides -->
+<div class="alert" style="border-color: oklch(0.5 0.14 145 / 0.4); background: oklch(0.5 0.14 145 / 0.06); color: oklch(0.35 0.1 145);">
+  Deployment successful.
+</div>
+
+<!-- Error -->
+<div class="alert" style="border-color: oklch(0.55 0.18 25 / 0.4); background: oklch(0.55 0.18 25 / 0.06); color: oklch(0.45 0.15 25);">
+  Build failed.
+</div>
+```
+
+---
+
+## Avatar
+
+```html
+<span class="avatar">AB</span>           <!-- 32px -->
+<span class="avatar avatar-sm">AB</span>  <!-- 24px -->
+<span class="avatar avatar-lg">AB</span>  <!-- 44px -->
+<span class="avatar avatar-xl">AB</span>  <!-- 60px -->
+
+<!-- With image -->
+<span class="avatar avatar-lg">
+  <img src="photo.jpg" alt="Name" />
+</span>
+
+<!-- Stacked overlap -->
+<div class="flex">
+  <span class="avatar" style="border: 2px solid var(--color-bg);">AB</span>
+  <span class="avatar" style="border: 2px solid var(--color-bg); margin-left: -8px;">CD</span>
+  <span class="avatar text-xs" style="border: 2px solid var(--color-bg); margin-left: -8px;">+4</span>
+</div>
+```
+
+---
+
+## Divider
+
+```html
+<hr />
+
+<!-- With label -->
+<div class="divider">OR</div>
+```
+
+---
+
+## Utility classes
+
+### Display / flex
+
+```
+.flex              display: flex
+.inline-flex       display: inline-flex
+.items-center      align-items: center
+.items-start       align-items: flex-start
+.justify-center    justify-content: center
+.justify-between   justify-content: space-between
+.flex-1            flex: 1
+.flex-wrap         flex-wrap: wrap
+.w-full            width: 100%
+```
+
+### Gap
+
+```
+.gap-1  .gap-2  .gap-3  .gap-4  .gap-6  .gap-8
+```
+
+### Margin top / bottom
+
+```
+.mt-1  .mt-2  .mt-3  .mt-4  .mt-6  .mt-8  .mt-12
+.mb-1  .mb-2  .mb-3  .mb-4  .mb-6  .mb-8
+```
+
+### Border radius
+
+```
+.rounded-sm    4px
+.rounded-md    7px
+.rounded-lg    11px
+.rounded-full  9999px
+```
+
+### Shadows / backgrounds / border
+
+```
+.shadow-sm  .shadow-md  .shadow-lg
+.bg-surface    background: --color-surface
+.bg-surface-2  background: --color-surface-2
+.border        border: 1px solid --color-border
+```
+
+### Misc
+
+```
+.opacity-50          opacity: 0.5
+.cursor-not-allowed  cursor: not-allowed
+.sr-only             visually hidden, accessible to screen readers
+```
+
+---
+
+## Customization
+
+### Swap the accent color
+
+```css
+:root {
+  --color-accent:      oklch(0.5 0.2 250);
+  --color-accent-text: #ffffff;
+}
+```
+
+### Write new components using tokens
+
+Always use semantic tokens so dark mode works for free:
+
+```css
+.my-component {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  color: var(--color-text-2);
+  transition: border-color var(--transition);
+}
+```
+
+### Change the font
+
+```css
+:root {
+  --font-sans: "Your Font", system-ui, sans-serif;
+}
+```
+
+---
+
+## Common patterns
+
+### Page shell
+
+```html
+<html data-theme="light">
+<head>
+  <link rel="stylesheet" href="mono.css" />
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="/" class="nav-brand">Brand</a>
+      <ul class="nav-links">
+        <li><a href="/about">About</a></li>
+        <li><a href="/work" class="active">Work</a></li>
+      </ul>
+      <div class="nav-spacer"></div>
+      <div class="nav-actions">
+        <a href="/contact" class="btn btn-primary btn-sm">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <section class="section">
+      <div class="container container-md">
+        <!-- content -->
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container" style="padding-block: var(--space-10); border-top: 1px solid var(--color-border);">
+      <p class="text-sm text-muted">2025 Brand</p>
+    </div>
+  </footer>
+</body>
+```
+
+### Settings / form page
+
+```html
+<div class="container container-md section">
+  <div class="stack stack-8">
+    <div class="stack stack-2">
+      <h2>Account settings</h2>
+      <p>Manage your profile and preferences.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Profile</span>
+      </div>
+      <div class="card-body">
+        <div class="stack stack-5">
+          <div class="grid grid-2">
+            <div class="field">
+              <label for="first">First name</label>
+              <input class="input" id="first" type="text" value="Alex" />
+            </div>
+            <div class="field">
+              <label for="last">Last name</label>
+              <input class="input" id="last" type="text" value="Chen" />
+            </div>
+          </div>
+          <div class="field">
+            <label for="bio">Bio</label>
+            <textarea class="textarea" id="bio" rows="3"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="flex justify-between items-center">
+          <span class="text-xs text-faint">Last updated 2 days ago</span>
+          <button class="btn btn-primary btn-sm">Save changes</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Notifications</span>
+      </div>
+      <div class="card-body">
+        <div class="stack stack-4">
+          <div class="flex justify-between items-center">
+            <div>
+              <p class="text-strong text-sm">Email updates</p>
+              <p class="text-faint text-xs">Receive product news</p>
+            </div>
+            <label class="switch-label"><input type="checkbox" checked /></label>
+          </div>
+          <div class="flex justify-between items-center">
+            <div>
+              <p class="text-strong text-sm">Security alerts</p>
+              <p class="text-faint text-xs">Account activity notifications</p>
+            </div>
+            <label class="switch-label"><input type="checkbox" checked /></label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+### Feature grid
+
+```html
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-label">Features</p>
+      <h2>Everything included</h2>
+      <p>No tiers, no add-ons.</p>
+    </div>
+    <div class="grid grid-3">
+      <div class="card card-hover">
+        <div class="card-body">
+          <p class="card-title">Feature name</p>
+          <p class="card-description mt-1">Short description of what this does.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+```
+
+---
+
+## Notes for code generation
+
+- Always use semantic HTML elements: `<nav>`, `<main>`, `<section>`, `<article>`, `<button>`, etc.
+- Form controls must be native elements (`<input>`, `<select>`, `<textarea>`). The classes style them, not replace them.
+- Dropdowns and accordions need `open` class toggled via JS. There is no CSS-only hover-open state.
+- Modal open/close is controlled by adding/removing `open` on `.modal-backdrop`, not `.modal` itself.
+- Dark mode tokens flip automatically. Never hardcode color values in components — always use `var(--color-*)` tokens.
+- The framework uses low specificity. Project styles can override without `!important`.
+- `<p>` tags have `max-width: 68ch` and `color: --color-text-2` by default. Use `.text-strong` or `style="max-width:none"` when needed.
+- Buttons are `display: inline-flex`, so SVG icons inside them align correctly without extra CSS.
+- For the accordion icon, use a `<svg>` with class `accordion-icon` — the open state rotates it 180deg via CSS.
+- The `.group` class is for joining button groups visually. For input+button or select+input combos, manually apply border-radius overrides as shown in the input group pattern above.
