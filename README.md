@@ -25,7 +25,7 @@ mono/
 ## usage
 
 ```html
-<link rel="stylesheet" href="mono.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/injoon5/mono@master/mono.css" />
 ```
 
 That's it. No npm, no bundler, no config.
