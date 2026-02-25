@@ -1106,9 +1106,12 @@ dialog.modal {
   width: calc(100% - var(--space-8));
   max-width: 500px;
   max-height: 90vh;
+  display: flex;
+  flex-direction: column;
   padding: 0;
   overflow: hidden;
   opacity: 0;
+  pointer-events: none;
   transform: scale(0.96) translateY(8px);
   transition: opacity var(--transition-slow), transform var(--transition-slow),
               display var(--transition-slow) allow-discrete,
@@ -1116,9 +1119,8 @@ dialog.modal {
 }
 
 dialog.modal[open] {
-  display: flex;
-  flex-direction: column;
   opacity: 1;
+  pointer-events: auto;
   transform: scale(1) translateY(0);
 }
 
