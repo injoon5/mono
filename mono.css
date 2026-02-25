@@ -427,6 +427,10 @@ label {
   margin: 0;
 }
 
+.nav-links li {
+  margin-top: 0;
+}
+
 .nav-links a {
   display: inline-flex;
   align-items: center;
