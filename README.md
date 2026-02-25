@@ -10,22 +10,24 @@ Inspired by the quiet confidence of [Vercel](https://vercel.com), the precision 
 
 ```
 mono/
-├── README.md  — some nice things to know about
-├── mono.css   — the whole framework, one file
-├── llms.txt   — docs for llms
-└── index.html — component reference & live preview
+├── mono.css    — the whole framework, one file
+├── index.html  — component reference & live preview
+├── llms.txt    — machine-readable docs for LLMs
+└── README.md
 ```
 
-**`mono.css`** is everything. Design tokens, reset, typography, layout utilities, and every component — all in one file you can drop into any project. Around 600 lines. No preprocessor needed.
+**`mono.css`** is everything. Design tokens, reset, typography, layout utilities, and every component — all in one file you can drop into any project. No preprocessor needed.
 
-**`index.html`** is a standalone demo page. Open it in a browser and you have a full component reference with a working dark mode toggle, interactive accordion, dropdowns, modals, and skeletons. Good for poking around before committing.
+**`index.html`** is a standalone demo page. Open it in a browser and you have a full component reference with a working dark mode toggle, interactive components, and live examples. Good for poking around before committing.
+
+**`llms.txt`** is a machine-readable reference of every token, class, and HTML pattern. Paste it into any LLM context window and it can generate correct, idiomatic Mono code without hallucinating class names.
 
 ---
 
 ## usage
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/injoon5/mono@master/mono.css" />
+<link rel="stylesheet" href="mono.css" />
 ```
 
 That's it. No npm, no bundler, no config.
@@ -52,9 +54,9 @@ That's it. No npm, no bundler, no config.
 - Input / Textarea / Select — shared style, hover/focus/error/disabled states
 - Checkbox / Radio / Switch / Range — all custom-styled with native HTML
 - Card — header, body, footer slots; hover and inverted variants
-- Accordion — animated open/close
-- Dropdown — scale + fade, dividers, labels, danger items
-- Modal — backdrop blur, scale-in, closes on Escape or backdrop click
+- Accordion — native `<details>`/`<summary>`, no JavaScript
+- Dropdown — native `<details>`/`<summary>`, no JavaScript
+- Modal — native `<dialog>`, focus trapping and Escape key for free
 - Loading — spinner, skeleton shimmer, animated dots
 - Badge, Alert, Avatar, Table, Code, Divider
 
@@ -82,11 +84,13 @@ Colors are written in `oklch` for perceptual uniformity. The whole palette is ac
 
 Radius is intentional — small but present. Enough to feel modern, not so much it feels bubbly.
 
+Interactive components (accordion, dropdown, modal) use native HTML elements — `<details>`, `<summary>`, `<dialog>` — so they work without any JavaScript and get browser-native accessibility behaviours for free.
+
 ---
 
 ## browser support
 
-Modern browsers. Uses `oklch()`, CSS custom properties, `backdrop-filter`, and `:has()` in a few places. No IE. No apologies.
+Modern browsers. Uses `oklch()`, CSS custom properties, `backdrop-filter`, native `<dialog>`, and `@starting-style` for enter animations. No IE. No apologies.
 
 ---
 
