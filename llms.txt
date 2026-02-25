@@ -268,27 +268,78 @@ Default gap is `--space-6` (1.5rem).
 
 ## Nav
 
-Sticky frosted-glass navbar. No dividers between links.
+Sticky frosted-glass navbar. No dividers between links. On screens ≤768px the links hide and a hamburger button appears. On screens ≤640px the `.nav-actions` also hide — only brand + hamburger remain.
 
 ```html
 <nav class="nav">
   <div class="nav-inner">
     <a href="/" class="nav-brand">Sitename</a>
 
+    <!-- Desktop links (hidden ≤768px) -->
     <ul class="nav-links">
       <li><a href="/about">About</a></li>
       <li><a href="/work" class="active">Work</a></li>
-      <li><a href="/contact">Contact</a></li>
     </ul>
 
     <div class="nav-spacer"></div>
 
+    <!-- Desktop actions (hidden ≤640px) -->
     <div class="nav-actions">
       <a href="/login" class="btn btn-ghost btn-sm">Log in</a>
       <a href="/signup" class="btn btn-primary btn-sm">Sign up</a>
     </div>
+
+    <!-- Hamburger (visible ≤768px) -->
+    <button class="nav-hamburger" id="nav-hamburger" onclick="toggleDrawer()" aria-label="Toggle menu" aria-expanded="false">
+      <svg id="hamburger-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="3" y1="6" x2="21" y2="6"/>
+        <line x1="3" y1="12" x2="21" y2="12"/>
+        <line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
   </div>
 </nav>
+
+<!-- Mobile drawer (directly after </nav>, inside <header>) -->
+<div class="nav-drawer" id="nav-drawer">
+  <ul class="nav-drawer-links">
+    <li><a href="/about" onclick="closeDrawer()">About</a></li>
+    <li><a href="/work" onclick="closeDrawer()">Work</a></li>
+  </ul>
+  <div class="nav-drawer-actions">
+    <a href="/login" class="btn btn-ghost btn-sm">Log in</a>
+    <a href="/signup" class="btn btn-primary btn-sm">Sign up</a>
+  </div>
+</div>
+```
+
+Drawer JS (required — only JS needed for nav):
+
+```js
+function toggleDrawer() {
+  const drawer = document.getElementById('nav-drawer');
+  const btn    = document.getElementById('nav-hamburger');
+  const icon   = document.getElementById('hamburger-icon');
+  const isOpen = drawer.classList.contains('open');
+  drawer.classList.toggle('open', !isOpen);
+  btn.setAttribute('aria-expanded', String(!isOpen));
+  icon.innerHTML = isOpen
+    ? '<line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>'
+    : '<line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>';
+}
+
+function closeDrawer() {
+  const drawer = document.getElementById('nav-drawer');
+  const btn    = document.getElementById('nav-hamburger');
+  const icon   = document.getElementById('hamburger-icon');
+  drawer.classList.remove('open');
+  btn.setAttribute('aria-expanded', 'false');
+  icon.innerHTML = '<line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>';
+}
+
+window.addEventListener('resize', () => {
+  if (window.innerWidth > 768) closeDrawer();
+});
 ```
 
 Nav links: hover darkens color and shows a slim underline sliding in from center. Active link has a persistent underline. No background color change on hover.
@@ -991,13 +1042,56 @@ Always use semantic tokens so dark mode works for free:
 
 ---
 
+## Responsive breakpoints
+
+Mono is desktop-first with two responsive breakpoints.
+
+| Breakpoint | Width | What changes |
+|---|---|---|
+| Tablet | ≤768px | Nav links hidden → hamburger shown. Heading scale reduced. Section padding reduced. |
+| Mobile | ≤640px | Nav actions hidden. Grids collapse to 1 column. Headings further reduced. Modals become bottom sheets. Section padding reduced further. |
+
+### Typography scale at each breakpoint
+
+| Element | Desktop | Tablet (≤768px) | Mobile (≤640px) |
+|---|---|---|---|
+| h1 | 50px | 38px | 29px |
+| h2 | 38px | 29px | 23px |
+| h3 | 29px | 23px | 19px |
+
+### Grid collapse
+
+```
+grid-2 → 2 col → 1 col at 640px
+grid-3 → 3 col → 2 col at 1024px → 1 col at 640px
+grid-4 → 4 col → 2 col at 1024px → 1 col at 640px
+```
+
+### Modal on mobile
+
+On screens ≤640px, `dialog.modal` becomes a bottom sheet: full-width, pinned to the bottom, slides up from below. No class change needed — the CSS handles it automatically.
+
+### Mobile utility classes
+
+```
+.sm\:stack       stack children vertically on mobile (flex-direction: column)
+.sm\:w-full      full width on mobile
+```
+
+### Always mobile-safe patterns
+
+Use `.cluster` with `flex-wrap: wrap` for button groups — they reflow naturally. Use `.stack` for vertical layouts. Use `max-width: none` on `<p>` when full-width text is needed inside flex containers.
+
+---
+
 ## Notes for code generation
 
 - Always use semantic HTML elements: `<nav>`, `<main>`, `<section>`, `<article>`, `<button>`, etc.
 - Form controls must be native elements (`<input>`, `<select>`, `<textarea>`). The classes style them, not replace them.
 - **Accordion**: use `<details>`/`<summary>` inside `.accordion`. No JS needed. Add `open` attribute to start expanded.
 - **Dropdown**: use `<details class="dropdown">` with `<summary class="btn ...">` as the trigger. No JS needed.
-- **Modal**: use `<dialog class="modal">`. Open with `.showModal()`. Close buttons use `<form method="dialog">`. No JS needed for open/close — Escape key works natively.
+- **Modal**: use `<dialog class="modal">`. Open with `.showModal()`. Close buttons use `<form method="dialog">`. No JS needed for open/close — Escape key works natively. On mobile it automatically becomes a bottom sheet.
+- **Nav**: always include the hamburger button and `nav-drawer` markup — the CSS shows/hides them automatically at the right breakpoints. The drawer requires the `toggleDrawer` / `closeDrawer` JS.
 - Dark mode tokens flip automatically. Never hardcode color values in components — always use `var(--color-*)` tokens.
 - The framework uses low specificity. Project styles can override without `!important`.
 - `<p>` tags have `max-width: 68ch` and `color: --color-text-2` by default. Use `.text-strong` or `style="max-width:none"` when needed.

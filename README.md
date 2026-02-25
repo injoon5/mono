@@ -62,6 +62,19 @@ That's it. No npm, no bundler, no config.
 
 ---
 
+## responsive
+
+Two breakpoints, desktop-first:
+
+| Breakpoint | Width | Changes |
+|---|---|---|
+| Tablet | ≤768px | Nav links collapse to hamburger + slide-out drawer. Headings scale down. |
+| Mobile | ≤640px | Nav actions hide. Grids go to 1 column. Headings scale down further. Modals become bottom sheets. |
+
+Nothing to configure — it's all in the stylesheet.
+
+---
+
 ## theming
 
 All colors are CSS custom properties. Override in your own stylesheet:
@@ -90,7 +103,7 @@ Interactive components (accordion, dropdown, modal) use native HTML elements —
 
 ## browser support
 
-Modern browsers. Uses `oklch()`, CSS custom properties, `backdrop-filter`, native `<dialog>`, and `@starting-style` for enter animations. No IE. No apologies.
+Modern browsers. Uses `oklch()`, CSS custom properties, `backdrop-filter`, native `<dialog>`, `@starting-style` for enter animations, and `color-mix()` for button states. No IE. No apologies.
 
 ---
 
