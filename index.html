@@ -179,10 +179,10 @@
       <!-- Step 1 -->
       <div class="stack stack-4">
         <p class="section-label">Option 1 — Download</p>
-        <p style="max-width: none;">Grab <code>mono.css</code> from the repo and drop it into your project.</p>
-        <pre>curl -O https://raw.githubusercontent.com/injoon5/mono/main/mono.css</pre>
+        <p style="max-width: none;">Grab <code>framework.css</code> from the repo and drop it into your project.</p>
+        <pre>curl -O https://raw.githubusercontent.com/injoon5/mono/main/framework.css</pre>
         <p style="max-width: none;">Then link it in your HTML:</p>
-        <pre>&lt;link rel="stylesheet" href="mono.css" /&gt;</pre>
+        <pre>&lt;link rel="stylesheet" href="framework.css" /&gt;</pre>
       </div>
 
       <!-- Step 2 -->
@@ -201,8 +201,8 @@ cd mono</pre>
             <div style="display: flex; align-items: center; gap: var(--space-4); padding: var(--space-4) var(--space-5); border-bottom: 1px solid var(--color-border);">
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-text-3); flex-shrink:0;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
               <div>
-                <p style="font-size: var(--text-sm); font-weight: 500; color: var(--color-text); margin: 0; max-width: none;"><code style="background:none; border:none; padding:0; font-size: inherit;">mono.css</code></p>
-                <p style="font-size: var(--text-xs); color: var(--color-text-3); margin: 0; max-width: none;">The full mono — tokens, reset, components. This is all you need.</p>
+                <p style="font-size: var(--text-sm); font-weight: 500; color: var(--color-text); margin: 0; max-width: none;"><code style="background:none; border:none; padding:0; font-size: inherit;">framework.css</code></p>
+                <p style="font-size: var(--text-xs); color: var(--color-text-3); margin: 0; max-width: none;">The full framework — tokens, reset, components. This is all you need.</p>
               </div>
             </div>
             <div style="display: flex; align-items: center; gap: var(--space-4); padding: var(--space-4) var(--space-5); border-bottom: 1px solid var(--color-border);">
@@ -238,7 +238,7 @@ cd mono</pre>
 &lt;head&gt;
   &lt;meta charset="UTF-8" /&gt;
   &lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
-  &lt;link rel="stylesheet" href="mono.css" /&gt;
+  &lt;link rel="stylesheet" href="framework.css" /&gt;
 &lt;/head&gt;
 &lt;body&gt;
 
@@ -704,50 +704,42 @@ root.setAttribute('data-theme', isDark ? 'light' : 'dark')</pre>
     <h2>Accordion</h2>
 
     <div class="accordion">
-      <div class="accordion-item open" id="acc-1">
-        <button class="accordion-trigger" onclick="toggleAccordion(this)">
-          What is this framework built with?
+      <details open>
+        <summary>
+          What is Mono built with?
           <svg class="accordion-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
-        </button>
-        <div class="accordion-content">
-          <div class="accordion-body">
-            This framework is pure CSS — no JavaScript dependencies, no build steps. It uses modern CSS features like custom properties, oklch color space, and logical properties. The only external asset is the Pretendard font served from jsDelivr.
-          </div>
+        </summary>
+        <div class="accordion-body">
+          Mono is pure CSS — no JavaScript dependencies, no build steps. It uses modern CSS features like custom properties, oklch color space, and native HTML elements (<code>details</code>, <code>dialog</code>) for interactive components. The only external asset is the Pretendard font served from jsDelivr.
         </div>
-      </div>
-      <div class="accordion-item" id="acc-2">
-        <button class="accordion-trigger" onclick="toggleAccordion(this)">
+      </details>
+      <details>
+        <summary>
           Does it support dark mode?
           <svg class="accordion-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
-        </button>
-        <div class="accordion-content">
-          <div class="accordion-body">
-            Yes. Dark mode is supported via both <code>prefers-color-scheme</code> media query for system-level preference, and a <code>data-theme="dark"</code> attribute on the root element for manual toggling. The color palette inverts cleanly across all components.
-          </div>
+        </summary>
+        <div class="accordion-body">
+          Yes. Dark mode is supported via both <code>prefers-color-scheme</code> media query for system-level preference, and a <code>data-theme="dark"</code> attribute on the root element for manual toggling. The color palette inverts cleanly across all components.
         </div>
-      </div>
-      <div class="accordion-item" id="acc-3">
-        <button class="accordion-trigger" onclick="toggleAccordion(this)">
+      </details>
+      <details>
+        <summary>
           How should I extend it?
           <svg class="accordion-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
-        </button>
-        <div class="accordion-content">
-          <div class="accordion-body">
-            Override or extend the custom properties in <code>:root</code> to change the design tokens globally. Add new component classes by following the existing naming patterns. The framework is intentionally low-specificity so project styles can override without <code>!important</code>.
-          </div>
+        </summary>
+        <div class="accordion-body">
+          Override or extend the custom properties in <code>:root</code> to change design tokens globally. Add new component classes following the existing naming patterns. Mono is intentionally low-specificity so project styles can override without <code>!important</code>.
         </div>
-      </div>
-      <div class="accordion-item" id="acc-4">
-        <button class="accordion-trigger" onclick="toggleAccordion(this)">
+      </details>
+      <details>
+        <summary>
           Is it accessible?
           <svg class="accordion-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
-        </button>
-        <div class="accordion-content">
-          <div class="accordion-body">
-            Focus states are visible and use a consistent outline style. Form controls use native HTML elements where possible. All interactive elements are keyboard-navigable. ARIA attributes should be added by the consumer where needed for dynamic components.
-          </div>
+        </summary>
+        <div class="accordion-body">
+          Focus states are visible and consistent. Form controls use native HTML elements. The accordion uses <code>&lt;details&gt;</code>/<code>&lt;summary&gt;</code> which are keyboard-navigable and announced by screen readers natively. The modal uses <code>&lt;dialog&gt;</code> which manages focus trapping automatically.
         </div>
-      </div>
+      </details>
     </div>
   </div>
 </section>
@@ -758,11 +750,11 @@ root.setAttribute('data-theme', isDark ? 'light' : 'dark')</pre>
     <h2>Dropdown</h2>
 
     <div class="demo-row">
-      <div class="dropdown" tabindex="0">
-        <button class="btn btn-secondary" onclick="toggleDropdown(this.parentElement)">
+      <details class="dropdown">
+        <summary class="btn btn-secondary">
           Options
           <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
-        </button>
+        </summary>
         <div class="dropdown-menu">
           <span class="dropdown-label">Actions</span>
           <button class="dropdown-item">
@@ -780,12 +772,12 @@ root.setAttribute('data-theme', isDark ? 'light' : 'dark')</pre>
             Delete
           </button>
         </div>
-      </div>
+      </details>
 
-      <div class="dropdown" tabindex="0">
-        <button class="btn btn-ghost btn-sm" onclick="toggleDropdown(this.parentElement)">
+      <details class="dropdown">
+        <summary class="btn btn-ghost btn-sm">
           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
-        </button>
+        </summary>
         <div class="dropdown-menu">
           <button class="dropdown-item active">Newest first</button>
           <button class="dropdown-item">Oldest first</button>
@@ -793,7 +785,7 @@ root.setAttribute('data-theme', isDark ? 'light' : 'dark')</pre>
           <div class="dropdown-divider"></div>
           <button class="dropdown-item">Group by type</button>
         </div>
-      </div>
+      </details>
     </div>
   </div>
 </section>
@@ -804,10 +796,10 @@ root.setAttribute('data-theme', isDark ? 'light' : 'dark')</pre>
     <h2>Modal</h2>
 
     <div class="cluster cluster-3">
-      <button class="btn btn-secondary" onclick="document.getElementById('modal-1').classList.add('open')">
+      <button class="btn btn-secondary" onclick="document.getElementById('modal-1').showModal()">
         Open modal
       </button>
-      <button class="btn btn-secondary" onclick="document.getElementById('modal-2').classList.add('open')">
+      <button class="btn btn-secondary" onclick="document.getElementById('modal-2').showModal()">
         Confirm dialog
       </button>
     </div>
@@ -815,64 +807,68 @@ root.setAttribute('data-theme', isDark ? 'light' : 'dark')</pre>
 </section>
 
 <!-- Modal 1 -->
-<div class="modal-backdrop" id="modal-1" onclick="closeModalOnBackdrop(event, 'modal-1')">
-  <div class="modal">
-    <div class="modal-header">
-      <div>
-        <p class="modal-title">Edit profile</p>
-        <p class="modal-subtitle">Update your personal information.</p>
-      </div>
-      <button class="modal-close" onclick="document.getElementById('modal-1').classList.remove('open')" aria-label="Close">
+<dialog class="modal" id="modal-1">
+  <div class="modal-header">
+    <div>
+      <p class="modal-title">Edit profile</p>
+      <p class="modal-subtitle">Update your personal information.</p>
+    </div>
+    <form method="dialog">
+      <button class="modal-close" aria-label="Close">
         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
-    </div>
-    <div class="modal-body">
-      <div class="stack stack-4">
-        <div class="field">
-          <label for="m-name">Name</label>
-          <input class="input" id="m-name" type="text" value="Alex Chen" />
-        </div>
-        <div class="field">
-          <label for="m-email">Email</label>
-          <input class="input" id="m-email" type="email" value="alex@example.com" />
-        </div>
-        <div class="field">
-          <label for="m-bio">Bio</label>
-          <textarea class="textarea" id="m-bio" rows="3" placeholder="Write a short bio..."></textarea>
-        </div>
+    </form>
+  </div>
+  <div class="modal-body">
+    <div class="stack stack-4">
+      <div class="field">
+        <label for="m-name">Name</label>
+        <input class="input" id="m-name" type="text" value="Alex Chen" />
+      </div>
+      <div class="field">
+        <label for="m-email">Email</label>
+        <input class="input" id="m-email" type="email" value="alex@example.com" />
+      </div>
+      <div class="field">
+        <label for="m-bio">Bio</label>
+        <textarea class="textarea" id="m-bio" rows="3" placeholder="Write a short bio..."></textarea>
       </div>
     </div>
-    <div class="modal-footer">
-      <button class="btn btn-ghost btn-sm" onclick="document.getElementById('modal-1').classList.remove('open')">Cancel</button>
-      <button class="btn btn-primary btn-sm" onclick="document.getElementById('modal-1').classList.remove('open')">Save changes</button>
-    </div>
   </div>
-</div>
+  <div class="modal-footer">
+    <form method="dialog">
+      <button class="btn btn-ghost btn-sm">Cancel</button>
+    </form>
+    <button class="btn btn-primary btn-sm" onclick="document.getElementById('modal-1').close()">Save changes</button>
+  </div>
+</dialog>
 
 <!-- Modal 2 — confirm -->
-<div class="modal-backdrop" id="modal-2" onclick="closeModalOnBackdrop(event, 'modal-2')">
-  <div class="modal modal-sm">
-    <div class="modal-header">
-      <div>
-        <p class="modal-title">Delete project</p>
-        <p class="modal-subtitle">This action cannot be undone.</p>
-      </div>
-      <button class="modal-close" onclick="document.getElementById('modal-2').classList.remove('open')" aria-label="Close">
+<dialog class="modal modal-sm" id="modal-2">
+  <div class="modal-header">
+    <div>
+      <p class="modal-title">Delete project</p>
+      <p class="modal-subtitle">This action cannot be undone.</p>
+    </div>
+    <form method="dialog">
+      <button class="modal-close" aria-label="Close">
         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
-    </div>
-    <div class="modal-body">
-      <p>Are you sure you want to delete <strong>design-system-v2</strong>? All associated deployments and data will be permanently removed.</p>
-    </div>
-    <div class="modal-footer">
-      <button class="btn btn-ghost btn-sm" onclick="document.getElementById('modal-2').classList.remove('open')">Cancel</button>
-      <button class="btn btn-sm" onclick="document.getElementById('modal-2').classList.remove('open')"
-        style="background: oklch(0.55 0.18 25); color: white; border-color: oklch(0.55 0.18 25);">
-        Delete project
-      </button>
-    </div>
+    </form>
   </div>
-</div>
+  <div class="modal-body">
+    <p>Are you sure you want to delete <strong>design-system-v2</strong>? All associated deployments and data will be permanently removed.</p>
+  </div>
+  <div class="modal-footer">
+    <form method="dialog">
+      <button class="btn btn-ghost btn-sm">Cancel</button>
+    </form>
+    <button class="btn btn-sm" onclick="document.getElementById('modal-2').close()"
+      style="background: oklch(0.55 0.18 25); color: white; border-color: oklch(0.55 0.18 25);">
+      Delete project
+    </button>
+  </div>
+</dialog>
 
 <!-- ── Loading ─────────────────────────────────────────── -->
 <section class="demo-section">
@@ -1060,7 +1056,7 @@ root.setAttribute('data-theme', isDark ? 'light' : 'dark')</pre>
       <div>
         <p class="section-label mb-4">Code</p>
         <pre>/* Using the framework */
-import 'mono.css'
+import 'framework.css'
 
 const App = () => (
   &lt;div className="container"&gt;
@@ -1094,43 +1090,37 @@ const App = () => (
       <div class="stack stack-4">
         <p class="section-label">How to use it</p>
         <div class="accordion">
-          <div class="accordion-item open">
-            <button class="accordion-trigger" onclick="toggleAccordion(this)">
+          <details open>
+            <summary>
               System prompt / project context
               <svg class="accordion-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
-            </button>
-            <div class="accordion-content">
-              <div class="accordion-body">
-                Paste the full contents of <code>llms.txt</code> into your system prompt or project instructions. Then ask the model to build UI using Mono. It will use the correct class names, token variables, and JS patterns without being told twice.
-                <pre style="margin-top: var(--space-3);">You are building UI with the Mono CSS framework.
+            </summary>
+            <div class="accordion-body">
+              Paste the full contents of <code>llms.txt</code> into your system prompt or project instructions. Then ask the model to build UI using Mono. It will use the correct class names, token variables, and JS patterns without being told twice.
+              <pre style="margin-top: var(--space-3);">You are building UI with the Mono CSS framework.
 [paste llms.txt contents here]
 
 Build me a settings page with a profile form and notification toggles.</pre>
-              </div>
             </div>
-          </div>
-          <div class="accordion-item">
-            <button class="accordion-trigger" onclick="toggleAccordion(this)">
+          </details>
+          <details>
+            <summary>
               Claude Projects / custom instructions
               <svg class="accordion-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
-            </button>
-            <div class="accordion-content">
-              <div class="accordion-body">
-                Upload <code>llms.txt</code> as a project file in Claude Projects or paste it into custom instructions. Every conversation in that project will then generate Mono-compatible HTML without needing to re-explain the framework.
-              </div>
+            </summary>
+            <div class="accordion-body">
+              Upload <code>llms.txt</code> as a project file in Claude Projects or paste it into custom instructions. Every conversation in that project will then generate Mono-compatible HTML without needing to re-explain the framework.
             </div>
-          </div>
-          <div class="accordion-item">
-            <button class="accordion-trigger" onclick="toggleAccordion(this)">
+          </details>
+          <details>
+            <summary>
               Cursor / Copilot / other code editors
               <svg class="accordion-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
-            </button>
-            <div class="accordion-content">
-              <div class="accordion-body">
-                Add <code>llms.txt</code> to your workspace root. Cursor, Copilot, and similar tools will index it alongside your codebase and use it to autocomplete components. No additional configuration needed.
-              </div>
+            </summary>
+            <div class="accordion-body">
+              Add <code>llms.txt</code> to your workspace root. Cursor, Copilot, and similar tools will index it alongside your codebase and use it to autocomplete components. No additional configuration needed.
             </div>
-          </div>
+          </details>
         </div>
       </div>
 
@@ -1210,40 +1200,11 @@ Build me a settings page with a profile form and notification toggles.</pre>
       : `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg> Dark mode`;
   })();
 
-  /* Accordion */
-  function toggleAccordion(btn) {
-    const item = btn.closest('.accordion-item');
-    const isOpen = item.classList.contains('open');
-    item.classList.toggle('open', !isOpen);
-  }
-
-  /* Dropdown */
-  function toggleDropdown(el) {
-    const isOpen = el.classList.contains('open');
-    // Close all
-    document.querySelectorAll('.dropdown.open').forEach(d => d.classList.remove('open'));
-    if (!isOpen) el.classList.add('open');
-  }
-
-  document.addEventListener('click', (e) => {
-    if (!e.target.closest('.dropdown')) {
-      document.querySelectorAll('.dropdown.open').forEach(d => d.classList.remove('open'));
-    }
-  });
-
-  /* Modal backdrop close */
-  function closeModalOnBackdrop(e, id) {
-    if (e.target === e.currentTarget) {
-      document.getElementById(id).classList.remove('open');
-    }
-  }
-
-  /* Escape key closes modals */
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      document.querySelectorAll('.modal-backdrop.open').forEach(m => m.classList.remove('open'));
-      document.querySelectorAll('.dropdown.open').forEach(d => d.classList.remove('open'));
-    }
+  /* Close <dialog> when clicking the backdrop */
+  document.querySelectorAll('dialog.modal').forEach(dialog => {
+    dialog.addEventListener('click', e => {
+      if (e.target === dialog) dialog.close();
+    });
   });
 </script>
 
