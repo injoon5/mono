@@ -934,10 +934,24 @@ label {
   border-bottom-right-radius: 0;
 }
 
-/* ── Dropdown ────────────────────────────────────────────── */
-.dropdown {
+/* ── Dropdown (details / summary) ───────────────────────── */
+details.dropdown {
   position: relative;
   display: inline-flex;
+}
+
+details.dropdown > summary {
+  list-style: none;
+  cursor: pointer;
+  user-select: none;
+}
+
+details.dropdown > summary::-webkit-details-marker { display: none; }
+
+details.dropdown[open] .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
 }
 
 .dropdown-menu {
@@ -957,13 +971,6 @@ label {
   transform-origin: top left;
   transition: opacity var(--transition), visibility var(--transition),
               transform var(--transition);
-}
-
-.dropdown.open .dropdown-menu,
-.dropdown:focus-within .dropdown-menu {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0) scale(1);
 }
 
 .dropdown-item {
@@ -1019,18 +1026,18 @@ label {
   color: var(--color-text-3);
 }
 
-/* ── Accordion ───────────────────────────────────────────── */
+/* ── Accordion (details / summary) ──────────────────────── */
 .accordion {
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   overflow: hidden;
 }
 
-.accordion-item + .accordion-item {
+.accordion details + details {
   border-top: 1px solid var(--color-border);
 }
 
-.accordion-trigger {
+.accordion details > summary {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1041,14 +1048,17 @@ label {
   font-weight: 500;
   color: var(--color-text);
   background: transparent;
-  border: none;
   cursor: pointer;
   text-align: left;
   transition: background var(--transition);
   letter-spacing: var(--tracking-normal);
+  list-style: none;
+  user-select: none;
 }
 
-.accordion-trigger:hover { background: var(--color-surface-2); }
+.accordion details > summary::-webkit-details-marker { display: none; }
+
+.accordion details > summary:hover { background: var(--color-surface-2); }
 
 .accordion-icon {
   flex-shrink: 0;
@@ -1058,18 +1068,17 @@ label {
   transition: transform var(--transition);
 }
 
-.accordion-item.open .accordion-icon {
+.accordion details[open] > summary .accordion-icon {
   transform: rotate(180deg);
 }
 
-.accordion-content {
-  overflow: hidden;
-  max-height: 0;
-  transition: max-height var(--transition-slow) var(--ease);
+@keyframes accordionIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-.accordion-item.open .accordion-content {
-  max-height: 600px;
+.accordion details[open] > .accordion-body {
+  animation: accordionIn var(--transition) var(--ease);
 }
 
 .accordion-body {
@@ -1079,49 +1088,55 @@ label {
   line-height: var(--leading-normal);
 }
 
-/* ── Modal ───────────────────────────────────────────────── */
-.modal-backdrop {
-  position: fixed;
-  inset: 0;
-  background: oklch(0 0 0 / 0.35);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  z-index: 400;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: var(--space-4);
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity var(--transition-slow), visibility var(--transition-slow);
-}
-
-.modal-backdrop.open {
-  opacity: 1;
-  visibility: visible;
-}
-
-.modal {
+/* ── Modal (dialog) ──────────────────────────────────────── */
+dialog.modal {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-xl);
   box-shadow: var(--shadow-xl);
-  width: 100%;
+  width: calc(100% - var(--space-8));
   max-width: 500px;
   max-height: 90vh;
   display: flex;
   flex-direction: column;
-  transform: scale(0.96) translateY(8px);
-  transition: transform var(--transition-slow);
+  padding: 0;
   overflow: hidden;
+  opacity: 0;
+  transform: scale(0.96) translateY(8px);
+  transition: opacity var(--transition-slow), transform var(--transition-slow),
+              display var(--transition-slow) allow-discrete,
+              overlay var(--transition-slow) allow-discrete;
 }
 
-.modal-backdrop.open .modal {
+dialog.modal[open] {
+  opacity: 1;
   transform: scale(1) translateY(0);
 }
 
-.modal-sm { max-width: 360px; }
-.modal-lg { max-width: 720px; }
+@starting-style {
+  dialog.modal[open] {
+    opacity: 0;
+    transform: scale(0.96) translateY(8px);
+  }
+}
+
+dialog.modal::backdrop {
+  background: oklch(0 0 0 / 0.35);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  transition: background var(--transition-slow),
+              display var(--transition-slow) allow-discrete,
+              overlay var(--transition-slow) allow-discrete;
+}
+
+@starting-style {
+  dialog.modal[open]::backdrop {
+    background: oklch(0 0 0 / 0);
+  }
+}
+
+dialog.modal-sm { max-width: 360px; }
+dialog.modal-lg { max-width: 720px; }
 
 .modal-header {
   display: flex;
