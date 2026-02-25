@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mono — Simple Semantic CSS Framework</title>
+  <title>Mono — Minimal CSS Framework</title>
   <link rel="stylesheet" href="mono.css" />
   <style>
     /* Demo-only overrides */
@@ -129,10 +129,12 @@
     <div class="nav-inner">
       <a href="#" class="nav-brand">Mono</a>
       <ul class="nav-links">
+        <li><a href="#install">Install</a></li>
         <li><a href="#typography">Type</a></li>
         <li><a href="#components">Components</a></li>
         <li><a href="#forms">Forms</a></li>
         <li><a href="#layout">Layout</a></li>
+        <li><a href="#llms">LLMs</a></li>
       </ul>
       <div class="nav-spacer"></div>
       <div class="nav-actions">
@@ -140,7 +142,10 @@
           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
           Toggle theme
         </button>
-        <a href="#" class="btn btn-primary btn-sm">Get started</a>
+        <a href="https://github.com/injoon5/mono" target="_blank" class="btn btn-secondary btn-sm">
+          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12"/></svg>
+          GitHub
+        </a>
       </div>
     </div>
   </nav>
@@ -150,12 +155,136 @@
 <main>
 <section class="hero">
   <div class="container container-md">
-    <p class="hero-eyebrow">Component reference</p>
+    <p class="hero-eyebrow">github.com/injoon5/mono</p>
     <h1>Mono</h1>
-    <p>A clean, honest CSS framework built on neutral tones and clear hierarchy. Designed to feel considered without being fussy.</p>
+    <p>A minimal CSS framework. One file, no build step, no dependencies. Drop it in and start building.</p>
     <div class="cluster cluster-3">
-      <a href="#components" class="btn btn-primary">Browse components</a>
-      <a href="#typography" class="btn btn-secondary">Typography</a>
+      <a href="#install" class="btn btn-primary">Get started</a>
+      <a href="#components" class="btn btn-secondary">Components</a>
+      <a href="https://github.com/injoon5/mono" target="_blank" class="btn btn-ghost">
+        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12"/></svg>
+        View on GitHub
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── Installation ────────────────────────────────────── -->
+<section class="demo-section" id="install">
+  <div class="container container-md">
+    <h2>Installation</h2>
+
+    <div class="stack stack-8">
+
+      <!-- Step 1 -->
+      <div class="stack stack-4">
+        <p class="section-label">Option 1 — Download</p>
+        <p style="max-width: none;">Grab <code>mono.css</code> from the repo and drop it into your project.</p>
+        <pre>curl -O https://raw.githubusercontent.com/injoon5/mono/main/mono.css</pre>
+        <p style="max-width: none;">Then link it in your HTML:</p>
+        <pre>&lt;link rel="stylesheet" href="mono.css" /&gt;</pre>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="stack stack-4">
+        <p class="section-label">Option 2 — Clone</p>
+        <pre>git clone https://github.com/injoon5/mono.git
+cd mono</pre>
+        <p style="max-width:none;">Open <code>index.html</code> in a browser to browse the component reference locally.</p>
+      </div>
+
+      <!-- File structure -->
+      <div class="stack stack-4">
+        <p class="section-label">Files</p>
+        <div class="card">
+          <div class="card-body" style="padding: 0;">
+            <div style="display: flex; align-items: center; gap: var(--space-4); padding: var(--space-4) var(--space-5); border-bottom: 1px solid var(--color-border);">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-text-3); flex-shrink:0;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              <div>
+                <p style="font-size: var(--text-sm); font-weight: 500; color: var(--color-text); margin: 0; max-width: none;"><code style="background:none; border:none; padding:0; font-size: inherit;">mono.css</code></p>
+                <p style="font-size: var(--text-xs); color: var(--color-text-3); margin: 0; max-width: none;">The full mono — tokens, reset, components. This is all you need.</p>
+              </div>
+            </div>
+            <div style="display: flex; align-items: center; gap: var(--space-4); padding: var(--space-4) var(--space-5); border-bottom: 1px solid var(--color-border);">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-text-3); flex-shrink:0;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              <div>
+                <p style="font-size: var(--text-sm); font-weight: 500; color: var(--color-text); margin: 0; max-width: none;"><code style="background:none; border:none; padding:0; font-size: inherit;">index.html</code></p>
+                <p style="font-size: var(--text-xs); color: var(--color-text-3); margin: 0; max-width: none;">This page. Full component reference with live examples.</p>
+              </div>
+            </div>
+            <div style="display: flex; align-items: center; gap: var(--space-4); padding: var(--space-4) var(--space-5); border-bottom: 1px solid var(--color-border);">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-text-3); flex-shrink:0;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              <div>
+                <p style="font-size: var(--text-sm); font-weight: 500; color: var(--color-text); margin: 0; max-width: none;"><code style="background:none; border:none; padding:0; font-size: inherit;">llms.txt</code></p>
+                <p style="font-size: var(--text-xs); color: var(--color-text-3); margin: 0; max-width: none;">Machine-readable docs. Paste into any LLM to get accurate Mono output.</p>
+              </div>
+            </div>
+            <div style="display: flex; align-items: center; gap: var(--space-4); padding: var(--space-4) var(--space-5);">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-text-3); flex-shrink:0;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              <div>
+                <p style="font-size: var(--text-sm); font-weight: 500; color: var(--color-text); margin: 0; max-width: none;"><code style="background:none; border:none; padding:0; font-size: inherit;">README.md</code></p>
+                <p style="font-size: var(--text-xs); color: var(--color-text-3); margin: 0; max-width: none;">Project overview and design notes.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick example -->
+      <div class="stack stack-4">
+        <p class="section-label">Quick example</p>
+        <pre>&lt;!DOCTYPE html&gt;
+&lt;html lang="en" data-theme="light"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8" /&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
+  &lt;link rel="stylesheet" href="mono.css" /&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+  &lt;nav class="nav"&gt;
+    &lt;div class="nav-inner"&gt;
+      &lt;a href="/" class="nav-brand"&gt;My site&lt;/a&gt;
+      &lt;div class="nav-spacer"&gt;&lt;/div&gt;
+      &lt;a href="/about" class="btn btn-ghost btn-sm"&gt;About&lt;/a&gt;
+      &lt;a href="/contact" class="btn btn-primary btn-sm"&gt;Contact&lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/nav&gt;
+
+  &lt;main&gt;
+    &lt;section class="section"&gt;
+      &lt;div class="container container-md"&gt;
+        &lt;h1&gt;Hello, world&lt;/h1&gt;
+        &lt;p&gt;Start building.&lt;/p&gt;
+        &lt;div class="grid grid-3 mt-8"&gt;
+          &lt;div class="card card-hover"&gt;
+            &lt;div class="card-body"&gt;
+              &lt;p class="card-title"&gt;Card&lt;/p&gt;
+              &lt;p class="card-description"&gt;A hoverable card.&lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/section&gt;
+  &lt;/main&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+      </div>
+
+      <!-- Theming note -->
+      <div class="stack stack-4">
+        <p class="section-label">Dark mode</p>
+        <p style="max-width:none;">Dark mode works automatically from <code>prefers-color-scheme</code>. Override manually with <code>data-theme</code> on <code>&lt;html&gt;</code>:</p>
+        <pre>&lt;html data-theme="dark"&gt;   &lt;!-- force dark --&gt;
+&lt;html data-theme="light"&gt;  &lt;!-- force light --&gt;</pre>
+        <p style="max-width:none;">Toggle with JS:</p>
+        <pre>const root = document.documentElement
+const isDark = root.getAttribute('data-theme') === 'dark'
+  || (!root.getAttribute('data-theme') &amp;&amp; matchMedia('(prefers-color-scheme: dark)').matches)
+root.setAttribute('data-theme', isDark ? 'light' : 'dark')</pre>
+      </div>
+
     </div>
   </div>
 </section>
@@ -167,35 +296,35 @@
 
     <!-- Type scale -->
     <div class="type-scale-item">
-      <span class="type-meta">4xl / 48</span>
+      <span class="type-meta">4xl / 50px</span>
       <h1 style="margin:0">The quick brown fox</h1>
     </div>
     <div class="type-scale-item">
-      <span class="type-meta">3xl / 36</span>
+      <span class="type-meta">3xl / 38px</span>
       <h2 style="margin:0">The quick brown fox jumps</h2>
     </div>
     <div class="type-scale-item">
-      <span class="type-meta">2xl / 28</span>
+      <span class="type-meta">2xl / 29px</span>
       <h3 style="margin:0">The quick brown fox jumps over</h3>
     </div>
     <div class="type-scale-item">
-      <span class="type-meta">xl / 22</span>
+      <span class="type-meta">xl / 23px</span>
       <h4 style="margin:0">The quick brown fox jumps over the lazy</h4>
     </div>
     <div class="type-scale-item">
-      <span class="type-meta">lg / 18</span>
+      <span class="type-meta">lg / 19px</span>
       <h5 style="margin:0">The quick brown fox jumps over the lazy dog</h5>
     </div>
     <div class="type-scale-item">
-      <span class="type-meta">base / 15</span>
+      <span class="type-meta">base / 16px</span>
       <p style="max-width:none;margin:0">The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs.</p>
     </div>
     <div class="type-scale-item">
-      <span class="type-meta">sm / 13</span>
+      <span class="type-meta">sm / 14px</span>
       <p class="text-sm" style="max-width:none;margin:0">The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs.</p>
     </div>
     <div class="type-scale-item">
-      <span class="type-meta">xs / 11</span>
+      <span class="type-meta">xs / 12px</span>
       <p class="text-xs text-muted" style="max-width:none;margin:0">The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs.</p>
     </div>
 
@@ -577,12 +706,12 @@
     <div class="accordion">
       <div class="accordion-item open" id="acc-1">
         <button class="accordion-trigger" onclick="toggleAccordion(this)">
-          What is this Mono built with?
+          What is this framework built with?
           <svg class="accordion-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
         </button>
         <div class="accordion-content">
           <div class="accordion-body">
-            Mono is pure CSS — no JavaScript dependencies, no build steps. It uses modern CSS features like custom properties, oklch color space, and logical properties. The only external asset is the Pretendard font served from jsDelivr.
+            This framework is pure CSS — no JavaScript dependencies, no build steps. It uses modern CSS features like custom properties, oklch color space, and logical properties. The only external asset is the Pretendard font served from jsDelivr.
           </div>
         </div>
       </div>
@@ -916,7 +1045,7 @@
           <span class="avatar">JS</span>
           <span class="avatar avatar-lg">KM</span>
           <span class="avatar avatar-xl">
-            <img src="https://api.dicebear.com/7.x/notionists/svg?seed=mono" alt="avatar" />
+            <img src="https://api.dicebear.com/7.x/notionists/svg?seed=framework" alt="avatar" />
           </span>
           <div class="cluster" style="gap: -4px;">
             <span class="avatar" style="border: 2px solid var(--color-bg); margin-left: -8px; first:margin-left:0">AC</span>
@@ -947,14 +1076,106 @@ const App = () => (
     </div>
   </div>
 </section>
+<!-- ── LLMs ─────────────────────────────────────────────── -->
+<section class="demo-section" id="llms">
+  <div class="container container-md">
+    <h2>Using with LLMs</h2>
+
+    <div class="stack stack-8">
+
+      <div class="stack stack-3">
+        <p style="max-width:none;">Mono ships a <code>llms.txt</code> — a machine-readable reference of every token, class, and component pattern. Paste it into any LLM context window and it can generate correct, idiomatic Mono code without hallucinating class names or missing wrappers.</p>
+        <a href="https://raw.githubusercontent.com/injoon5/mono/main/llms.txt" target="_blank" class="btn btn-secondary" style="align-self: flex-start;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          View llms.txt
+        </a>
+      </div>
+
+      <div class="stack stack-4">
+        <p class="section-label">How to use it</p>
+        <div class="accordion">
+          <div class="accordion-item open">
+            <button class="accordion-trigger" onclick="toggleAccordion(this)">
+              System prompt / project context
+              <svg class="accordion-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div class="accordion-content">
+              <div class="accordion-body">
+                Paste the full contents of <code>llms.txt</code> into your system prompt or project instructions. Then ask the model to build UI using Mono. It will use the correct class names, token variables, and JS patterns without being told twice.
+                <pre style="margin-top: var(--space-3);">You are building UI with the Mono CSS framework.
+[paste llms.txt contents here]
+
+Build me a settings page with a profile form and notification toggles.</pre>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <button class="accordion-trigger" onclick="toggleAccordion(this)">
+              Claude Projects / custom instructions
+              <svg class="accordion-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div class="accordion-content">
+              <div class="accordion-body">
+                Upload <code>llms.txt</code> as a project file in Claude Projects or paste it into custom instructions. Every conversation in that project will then generate Mono-compatible HTML without needing to re-explain the framework.
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <button class="accordion-trigger" onclick="toggleAccordion(this)">
+              Cursor / Copilot / other code editors
+              <svg class="accordion-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div class="accordion-content">
+              <div class="accordion-body">
+                Add <code>llms.txt</code> to your workspace root. Cursor, Copilot, and similar tools will index it alongside your codebase and use it to autocomplete components. No additional configuration needed.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="stack stack-4">
+        <p class="section-label">What's inside llms.txt</p>
+        <div class="grid grid-3" style="gap: var(--space-4);">
+          <div class="card">
+            <div class="card-body">
+              <p class="card-title">All design tokens</p>
+              <p class="card-description mt-1">Every CSS custom property with exact values — colors, spacing, type scale, radius, shadows, transitions.</p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-body">
+              <p class="card-title">HTML patterns</p>
+              <p class="card-description mt-1">Correct markup for every component, including required wrappers, modifiers, and element hierarchy.</p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-body">
+              <p class="card-title">JS snippets</p>
+              <p class="card-description mt-1">Working toggle code for accordion, dropdown, modal, and dark mode — copied verbatim from the demo.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
 </main>
 
 <!-- ── Footer ─────────────────────────────────────────── -->
 <footer>
   <div class="container" style="padding-block: var(--space-10); border-top: 1px solid var(--color-border);">
     <div class="flex justify-between items-center" style="flex-wrap: wrap; gap: var(--space-4);">
-      <span class="text-sm text-muted">Mono — A minimal CSS system.</span>
-      <span class="text-xs text-faint">Built by Injoon Oh using Claude</span>
+      <div class="stack stack-1">
+        <span class="text-sm" style="font-weight: 500; color: var(--color-text);">Mono</span>
+        <span class="text-xs text-faint">A minimal CSS framework. MIT license.</span>
+      </div>
+      <div class="cluster cluster-4">
+        <a href="https://github.com/injoon5/mono" target="_blank" class="text-sm text-muted" style="text-decoration: none;">GitHub</a>
+        <a href="https://raw.githubusercontent.com/injoon5/mono/main/llms.txt" target="_blank" class="text-sm text-muted" style="text-decoration: none;">llms.txt</a>
+        <a href="https://raw.githubusercontent.com/injoon5/mono/main/README.md" target="_blank" class="text-sm text-muted" style="text-decoration: none;">README</a>
+      </div>
     </div>
   </div>
 </footer>
