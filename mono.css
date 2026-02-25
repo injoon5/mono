@@ -498,8 +498,14 @@ label {
   color: var(--color-accent-text);
   border-color: var(--color-accent);
 }
-.btn-primary:hover { opacity: 0.88; }
-.btn-primary:active { opacity: 0.75; }
+.btn-primary:hover {
+  background: color-mix(in oklch, var(--color-accent), var(--color-bg) 18%);
+  border-color: color-mix(in oklch, var(--color-accent), var(--color-bg) 18%);
+}
+.btn-primary:active {
+  background: color-mix(in oklch, var(--color-accent), var(--color-bg) 36%);
+  border-color: color-mix(in oklch, var(--color-accent), var(--color-bg) 36%);
+}
 
 /* Secondary */
 .btn-secondary {
@@ -512,6 +518,10 @@ label {
   background: var(--color-surface-2);
   border-color: var(--color-border-strong);
 }
+.btn-secondary:active {
+  background: var(--color-border);
+  border-color: var(--color-border-strong);
+}
 
 /* Ghost */
 .btn-ghost {
@@ -521,6 +531,10 @@ label {
 }
 .btn-ghost:hover {
   background: var(--color-surface-2);
+  color: var(--color-text);
+}
+.btn-ghost:active {
+  background: var(--color-border);
   color: var(--color-text);
 }
 
